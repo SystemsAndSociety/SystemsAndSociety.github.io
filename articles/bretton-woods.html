@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Slow Fracture of Bretton Woods — Systems & Society</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1713; --paper: #f4f0e8; --muted: #7a7168;
+      --rule: #c8c0b0; --accent: #2d4a3e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { background: var(--paper); color: var(--ink); font-family: 'Source Serif 4', Georgia, serif; font-weight: 300; line-height: 1.7; min-height: 100vh; }
+    body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; }
+
+    header { border-bottom: 1px solid var(--rule); padding: 0 2rem; }
+    .masthead-top { display:flex; align-items:center; justify-content:space-between; padding:1.2rem 0 1rem; border-bottom:1px solid var(--rule); gap:1rem; }
+    .issue-tag { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+    .site-title { font-family:'Libre Baskerville',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; line-height:1; text-align:center; flex:1; text-decoration:none; color:var(--ink); }
+    .site-title em { font-style:italic; font-weight:400; }
+    .tagline-right { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em; color:var(--muted); text-align:right; }
+    .masthead-nav { display:flex; padding:0.6rem 0; align-items:center; justify-content:center; flex-wrap:wrap; }
+    .masthead-nav a { font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--ink); padding:0.3rem 1.2rem; border-right:1px solid var(--rule); transition:color 0.15s; }
+    .masthead-nav a:first-child { border-left:1px solid var(--rule); }
+    .masthead-nav a:hover { color:var(--accent); }
+    .masthead-nav a.active { color:var(--accent); font-weight:500; }
+
+    .article-container { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; position: relative; z-index: 1; }
+
+    .back-link { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--muted); margin-bottom:2.5rem; transition:color 0.15s; }
+    .back-link:hover { color:var(--ink); }
+
+    .article-discipline { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+    .article-title { font-family:'Libre Baskerville',serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:700; line-height:1.15; letter-spacing:-0.025em; margin-bottom:1.2rem; }
+    .article-title em { font-weight:400; }
+    .article-dek { font-size:1.15rem; line-height:1.65; color:#3a3530; font-style:italic; margin-bottom:1.5rem; }
+    .article-meta { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.08em; color:var(--muted); padding-bottom:2rem; border-bottom:1px solid var(--rule); margin-bottom:2.5rem; }
+
+    .article-body { font-size:1.05rem; line-height:1.9; color:#2a2520; }
+    .article-body p { margin-bottom:1.5rem; }
+    .article-body h2 { font-family:'Libre Baskerville',serif; font-size:1.3rem; font-weight:700; margin:2.5rem 0 1rem; color:var(--ink); letter-spacing:-0.01em; }
+    .article-body blockquote { border-left:3px solid var(--ink); padding:0.2rem 0 0.2rem 1.5rem; margin:2rem 0; }
+    .article-body blockquote p { font-family:'Libre Baskerville',serif; font-size:1.1rem; font-style:italic; color:#3a3530; margin-bottom:0; }
+
+    .article-footer { margin-top:4rem; padding-top:2rem; border-top:1px solid var(--rule); display:flex; justify-content:space-between; align-items:center; }
+    .article-footer a { font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; color:var(--ink); border-bottom:1.5px solid var(--ink); padding-bottom:1px; transition:color 0.15s,border-color 0.15s; }
+    .article-footer a:hover { color:var(--accent); border-color:var(--accent); }
+
+    footer { border-top:2px solid var(--ink); padding:1.5rem 2rem; max-width:1160px; margin:0 auto 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .footer-title { font-family:'Libre Baskerville',serif; font-size:0.9rem; font-weight:700; }
+    .footer-note { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted); letter-spacing:0.06em; }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);} }
+    .article-container { animation:fadeUp 0.5s ease both; }
+
+    @media(max-width:560px){ .article-container{padding:2rem 1rem 4rem;} header{padding:0 1rem;} .masthead-top{flex-direction:column;text-align:center;} }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="masthead-top">
+    <span class="issue-tag">Est. 2025 &nbsp;·&nbsp; Rotterdam</span>
+    <a href="../index.html" class="site-title">Systems <em>&</em> Society</a>
+    <span class="tagline-right">On the structures<br>that shape us</span>
+  </div>
+  <nav class="masthead-nav">
+    <a href="../index.html">All</a>
+    <a href="../archive.html?cat=Economics">Economics</a>
+    <a href="../archive.html?cat=Geopolitics" class="active">Geopolitics</a>
+    <a href="../archive.html?cat=Philosophy">Philosophy</a>
+    <a href="../archive.html?cat=Psychology">Psychology</a>
+    <a href="../archive.html?cat=Sociology">Sociology</a>
+    <a href="../archive.html">Archive</a>
+    <a href="../about.html">About</a>
+  </nav>
+</header>
+
+<div class="article-container">
+  <a href="../index.html" class="back-link">← All essays</a>
+
+  <div class="article-discipline">Geopolitics &nbsp;·&nbsp; Economics</div>
+  <h1 class="article-title">The Slow Fracture of <em>Bretton Woods</em></h1>
+  <p class="article-dek">How the post-war monetary order is being quietly dismantled — not through crisis, but through decades of accumulated strain, and what comes after.</p>
+  <div class="article-meta">March 2025 &nbsp;·&nbsp; 22 min read</div>
+
+  <div class="article-body">
+    <p>In July 1944, delegates from 44 Allied nations gathered at the Mount Washington Hotel in Bretton Woods, New Hampshire, to design the post-war international monetary system. What emerged — fixed exchange rates anchored to the dollar, the dollar anchored to gold, two new international institutions to enforce stability — was less a plan than a bet. A bet that American dominance would be durable enough to hold the whole arrangement together.</p>
+
+    <p>The formal system collapsed in 1971 when Nixon suspended dollar-gold convertibility. But the deeper architecture — dollar hegemony, American-led multilateralism, the centrality of US financial markets — survived and in some ways strengthened. What we're watching now is the slow fracture of that deeper layer.</p>
+
+    <h2>The ledger that doesn't balance</h2>
+
+    <p>The structural contradiction is simple to state. The world's reserve currency must be supplied to the world, which means the issuing country must run persistent current account deficits. But persistent deficits eventually undermine confidence in the currency. Robert Triffin named this problem in 1960. It has never been solved — only deferred, through a combination of inertia, the absence of alternatives, and the willingness of surplus countries to keep recycling their earnings into US treasuries.</p>
+
+    <blockquote>
+      <p>"The system works until it doesn't. And the transition from working to not-working is rarely announced in advance."</p>
+    </blockquote>
+
+    <p>What's changed in the last decade is the erosion of the political conditions that made the deferral possible. The weaponisation of dollar clearing — most dramatically in the freezing of Russian central bank reserves in 2022 — has accelerated the search for alternatives among countries that previously had no urgent reason to look.</p>
+
+    <p>This isn't just Russia and China. The response has been broader and more diverse. Central banks globally have increased gold reserves to levels not seen since the 1960s. Bilateral trade agreements denominated in non-dollar currencies are proliferating. The BRICS grouping, for all its internal contradictions, represents a serious political project to develop alternative payment infrastructure.</p>
+
+    <h2>The absence of alternatives</h2>
+
+    <p>The most powerful argument for continued dollar dominance is simple: there is nothing ready to replace it. The euro is structurally handicapped by the absence of a common fiscal authority. The renminbi is not freely convertible and operates in a financial system that foreign investors do not fully trust. Gold cannot scale to meet global liquidity needs. A synthetic reserve asset faces coordination problems that have defeated every previous attempt.</p>
+
+    <p>This argument is correct as far as it goes. But it mistakes durability for stability. The dollar system can persist for a long time beyond the point at which it has stopped serving the interests of the countries that sustain it. Inertia is not the same as confidence. And when confidence finally breaks, it tends to break quickly.</p>
+
+    <h2>What comes after</h2>
+
+    <p>The honest answer is that nobody knows. The scenarios range from gradual multipolarity — a world of regional currency blocs, with no single dominant reserve — to a more chaotic fragmentation. What seems unlikely is a clean transition to a new Bretton Woods. The political conditions for that kind of coordinated redesign don't exist. The US has no incentive to convene a conference that would formalise a reduction in its own privileges. Rising powers have divergent interests and mutual suspicions that would complicate any joint architecture.</p>
+
+    <p>The more probable path is the one we're already on: slow, uneven, punctuated by crises that accelerate the shift without resolving it. Empires don't fall when they lose wars. They fall when the ledger no longer balances — and everyone pretends it still does.</p>
+  </div>
+
+  <div class="article-footer">
+    <a href="../index.html">← Back to all essays</a>
+    <a href="../archive.html">Browse archive →</a>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-title">Systems &amp; Society</span>
+  <span class="footer-note">Independent &nbsp;·&nbsp; No ads &nbsp;·&nbsp; Rotterdam &nbsp;·&nbsp; Est. 2025</span>
+</footer>
+
+</body>
+</html>

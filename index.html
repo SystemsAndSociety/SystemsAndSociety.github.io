@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Systems & Society</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1a1713;
+      --paper: #f4f0e8;
+      --muted: #7a7168;
+      --rule: #c8c0b0;
+      --accent: #2d4a3e;
+      --col: 680px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* Subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── MASTHEAD ────────────────────────────── */
+    header {
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+    }
+
+    .masthead-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 0 1rem;
+      border-bottom: 1px solid var(--rule);
+      gap: 1rem;
+    }
+
+    .issue-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .site-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-align: center;
+      flex: 1;
+    }
+
+    .site-title em {
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .tagline-right {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .masthead-nav {
+      display: flex;
+      gap: 0;
+      padding: 0.6rem 0;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .masthead-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 0.3rem 1.2rem;
+      border-right: 1px solid var(--rule);
+      transition: color 0.15s;
+    }
+
+    .masthead-nav a:first-child { border-left: 1px solid var(--rule); }
+    .masthead-nav a:hover { color: var(--accent); }
+    .masthead-nav a.active { color: var(--accent); font-weight: 500; }
+
+    /* ── LAYOUT ──────────────────────────────── */
+    main {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── FEATURED ESSAY ──────────────────────── */
+    .featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--rule);
+      padding: 3rem 0;
+    }
+
+    .featured-text {
+      padding-right: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .featured-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .featured-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .featured-title em { font-weight: 400; }
+
+    .featured-dek {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: #3a3530;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .read-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .read-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    .featured-aside {
+      padding-left: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .pull-quote {
+      border-left: 3px solid var(--ink);
+      padding-left: 1.4rem;
+      margin: 0;
+    }
+
+    .pull-quote p {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .featured-topics {
+      margin-top: 2rem;
+    }
+
+    .topics-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .topic-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .pill {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .pill:hover { border-color: var(--ink); color: var(--ink); }
+
+    /* ── THREE-COLUMN GRID ───────────────────── */
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 2rem 0 1.2rem;
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: 0;
+    }
+
+    .section-head h2 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .section-head .section-rule {
+      flex: 1;
+      height: 1px;
+      background: transparent;
+    }
+
+    .section-head .section-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-left: 1px solid var(--rule);
+    }
+
+    .article-card {
+      padding: 1.8rem 1.6rem;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .article-card:hover { background: rgba(0,0,0,0.02); }
+
+    .card-discipline {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.7rem;
+    }
+
+    .card-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-title em { font-weight: 400; }
+
+    .card-excerpt {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #4a4540;
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    .card-len {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    /* ── ABOUT STRIP ─────────────────────────── */
+    .about-strip {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      margin: 3rem 0;
+      padding: 2rem 0;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .about-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    .about-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3a3530;
+      max-width: 60ch;
+    }
+
+    .about-text strong {
+      font-weight: 700;
+      font-family: 'Libre Baskerville', serif;
+    }
+
+    .subscribe-box {
+      border: 1px solid var(--rule);
+      padding: 1.2rem 1.5rem;
+      min-width: 220px;
+    }
+
+    .subscribe-box p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .subscribe-box input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--ink);
+      padding: 0.4rem 0;
+      font-family: 'Source Serif 4', serif;
+      font-size: 0.88rem;
+      color: var(--ink);
+      outline: none;
+      margin-bottom: 0.8rem;
+    }
+
+    .subscribe-box input::placeholder { color: var(--rule); }
+
+    .subscribe-box button {
+      width: 100%;
+      background: var(--ink);
+      color: var(--paper);
+      border: none;
+      padding: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .subscribe-box button:hover { background: var(--accent); }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      border-top: 2px solid var(--ink);
+      padding: 1.5rem 2rem;
+      max-width: 1160px;
+      margin: 0 auto 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-title {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .footer-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ANIMATIONS ──────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .featured, .articles-grid, .about-strip {
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .articles-grid { animation-delay: 0.1s; }
+    .about-strip   { animation-delay: 0.2s; }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 800px) {
+      .featured { grid-template-columns: 1fr; }
+      .featured-text { padding-right: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
+      .featured-aside { padding-left: 0; }
+      .articles-grid { grid-template-columns: 1fr 1fr; }
+      .about-strip { grid-template-columns: 1fr; }
+      .about-label { writing-mode: horizontal-tb; transform: none; }
+      .masthead-top { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 560px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      main { padding: 0 1rem; }
+      header { padding: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="masthead-top">
+    <span class="issue-tag">Est. 2025 &nbsp;·&nbsp; Rotterdam</span>
+    <div class="site-title">Systems <em>&</em> Society</div>
+    <span class="tagline-right">On the structures<br>that shape us</span>
+  </div>
+  <nav class="masthead-nav">
+    <a href="index.html" class="active">All</a>
+    <a href="archive.html?cat=Economics">Economics</a>
+    <a href="archive.html?cat=Geopolitics">Geopolitics</a>
+    <a href="archive.html?cat=Philosophy">Philosophy</a>
+    <a href="archive.html?cat=Psychology">Psychology</a>
+    <a href="archive.html?cat=Sociology">Sociology</a>
+    <a href="archive.html">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- FEATURED -->
+  <section class="featured">
+    <div class="featured-text">
+      <div class="featured-meta">Featured Essay &nbsp;·&nbsp; Geopolitics &amp; Economics</div>
+      <h1 class="featured-title">The Slow Fracture of <em>Bretton Woods</em></h1>
+      <p class="featured-dek">How the post-war monetary order is being quietly dismantled — not through crisis, but through decades of accumulated strain, and what comes after.</p>
+      <a href="articles/bretton-woods.html" class="read-link">Read essay &rarr;</a>
+    </div>
+    <div class="featured-aside">
+      <blockquote class="pull-quote">
+        <p>"Empires don't fall when they lose wars. They fall when the ledger no longer balances — and everyone pretends it still does."</p>
+      </blockquote>
+      <div class="featured-topics">
+        <div class="topics-label">Themes</div>
+        <div class="topic-pills">
+          <a href="#" class="pill">Monetary Policy</a>
+          <a href="#" class="pill">Dollar Hegemony</a>
+          <a href="#" class="pill">Multipolarity</a>
+          <a href="#" class="pill">History</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECENT -->
+  <div class="section-head">
+    <h2>Recent</h2>
+    <div class="section-rule"></div>
+    <span class="section-count">12 essays</span>
+  </div>
+  <div class="articles-grid">
+
+    <article class="article-card" onclick="location.href='articles/negative-liberty.html'" style="cursor:pointer">
+      <div class="card-discipline">Philosophy</div>
+      <h3 class="card-title">Negative Liberty and the <em>Illusion of Choice</em></h3>
+      <p class="card-excerpt">Isaiah Berlin drew a line between freedom-from and freedom-to. Most liberal democracies only ever deliver one of them.</p>
+      <div class="card-footer">
+        <span class="card-date">March 2025</span>
+        <span class="card-len">11 min</span>
+      </div>
+    </article>
+
+    <article class="article-card" onclick="location.href='articles/architecture-of-class.html'" style="cursor:pointer">
+      <div class="card-discipline">Sociology</div>
+      <h3 class="card-title">The <em>Invisible</em> Architecture of Class</h3>
+      <p class="card-excerpt">Bourdieu called it habitus — the way class inscribes itself into posture, taste, and the words we reach for in silence.</p>
+      <div class="card-footer">
+        <span class="card-date">February 2025</span>
+        <span class="card-len">14 min</span>
+      </div>
+    </article>
+
+    <article class="article-card" onclick="location.href='articles/collective-narcissism.html'" style="cursor:pointer">
+      <div class="card-discipline">Psychology</div>
+      <h3 class="card-title">Collective Narcissism and the <em>Wounded Nation</em></h3>
+      <p class="card-excerpt">Why groups that feel humiliated become dangerous — and why victimhood, when weaponised, distorts more than it explains.</p>
+      <div class="card-footer">
+        <span class="card-date">January 2025</span>
+        <span class="card-len">9 min</span>
+      </div>
+    </article>
+
+    <article class="article-card" onclick="location.href='articles/degrowth.html'" style="cursor:pointer">
+      <div class="card-discipline">Economics</div>
+      <h3 class="card-title">Why <em>Degrowth</em> Misunderstands Capitalism</h3>
+      <p class="card-excerpt">The movement has real diagnoses and confused prescriptions. A sympathetic critique of what it gets right and why it still fails.</p>
+      <div class="card-footer">
+        <span class="card-date">December 2024</span>
+        <span class="card-len">16 min</span>
+      </div>
+    </article>
+
+    <article class="article-card" onclick="location.href='articles/peripheral-states.html'" style="cursor:pointer">
+      <div class="card-discipline">Geopolitics</div>
+      <h3 class="card-title">The <em>Peripheral</em> States and Their Leverage</h3>
+      <p class="card-excerpt">Small nations in contested regions aren't merely passive objects of great-power competition. Some have learned to play both sides extremely well.</p>
+      <div class="card-footer">
+        <span class="card-date">November 2024</span>
+        <span class="card-len">12 min</span>
+      </div>
+    </article>
+
+    <article class="article-card" onclick="location.href='articles/hegel-end-of-history.html'" style="cursor:pointer">
+      <div class="card-discipline">Philosophy</div>
+      <h3 class="card-title">Hegel's State and the <em>End of History</em> Revisited</h3>
+      <p class="card-excerpt">Fukuyama borrowed the frame but inverted the content. Reading the original argument makes the liberal triumphalism look stranger, not more stable.</p>
+      <div class="card-footer">
+        <span class="card-date">October 2024</span>
+        <span class="card-len">18 min</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-strip">
+    <span class="about-label">About</span>
+    <p class="about-text">
+      <strong>Systems &amp; Society</strong> is an independent archive of long-form essays on the structures that organise human life — economic, political, philosophical, and psychological. No algorithm, no newsletter cadence, no takes. Just essays, written when they're ready.
+    </p>
+    <div class="subscribe-box">
+      <p>New essays by email</p>
+      <input type="email" placeholder="your@email.com" />
+      <button>Subscribe</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span class="footer-title">Systems &amp; Society</span>
+  <span class="footer-note">Independent &nbsp;·&nbsp; No ads &nbsp;·&nbsp; Rotterdam &nbsp;·&nbsp; Est. 2025</span>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archive — Systems & Society</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#1a1713; --paper:#f4f0e8; --muted:#7a7168; --rule:#c8c0b0; --accent:#2d4a3e; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:16px;}
+    body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-weight:300;line-height:1.7;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+    header{border-bottom:1px solid var(--rule);padding:0 2rem;}
+    .masthead-top{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0 1rem;border-bottom:1px solid var(--rule);gap:1rem;}
+    .issue-tag{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+    .site-title{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.02em;line-height:1;text-align:center;flex:1;text-decoration:none;color:var(--ink);}
+    .site-title em{font-style:italic;font-weight:400;}
+    .tagline-right{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;color:var(--muted);text-align:right;}
+    .masthead-nav{display:flex;padding:0.6rem 0;align-items:center;justify-content:center;flex-wrap:wrap;}
+    .masthead-nav a{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:0.3rem 1.2rem;border-right:1px solid var(--rule);transition:color 0.15s;}
+    .masthead-nav a:first-child{border-left:1px solid var(--rule);}
+    .masthead-nav a:hover{color:var(--accent);}
+    .masthead-nav a.active{color:var(--accent);font-weight:500;}
+    main{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem;position:relative;z-index:1;}
+    .section-head{display:flex;align-items:baseline;gap:1rem;padding-bottom:0.8rem;border-bottom:2px solid var(--ink);margin-bottom:0;}
+    .section-head h1{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;font-weight:500;}
+    .section-count{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);margin-left:auto;}
+    .archive-item{display:grid;grid-template-columns:2rem 1fr auto;gap:1.5rem;align-items:baseline;padding:1.2rem 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink);transition:color 0.15s;}
+    .archive-item:hover .item-title{color:var(--accent);}
+    .item-num{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);}
+    .item-title{font-family:'Libre Baskerville',serif;font-size:1.05rem;font-weight:700;transition:color 0.15s;}
+    .item-title em{font-weight:400;}
+    .item-right{display:flex;gap:1.5rem;align-items:center;}
+    .item-cat{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);}
+    .item-date{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);}
+    footer{border-top:2px solid var(--ink);padding:1.5rem 2rem;max-width:1160px;margin:0 auto 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-title{font-family:'Libre Baskerville',serif;font-size:0.9rem;font-weight:700;}
+    .footer-note{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.06em;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+    main{animation:fadeUp 0.5s ease both;}
+    @media(max-width:560px){main{padding:2rem 1rem;}header{padding:0 1rem;}.masthead-top{flex-direction:column;text-align:center;}.item-right{display:none;}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="masthead-top">
+    <span class="issue-tag">Est. 2025 &nbsp;·&nbsp; Rotterdam</span>
+    <a href="index.html" class="site-title">Systems <em>&</em> Society</a>
+    <span class="tagline-right">On the structures<br>that shape us</span>
+  </div>
+  <nav class="masthead-nav">
+    <a href="index.html">All</a>
+    <a href="archive.html?cat=Economics">Economics</a>
+    <a href="archive.html?cat=Geopolitics">Geopolitics</a>
+    <a href="archive.html?cat=Philosophy">Philosophy</a>
+    <a href="archive.html?cat=Psychology">Psychology</a>
+    <a href="archive.html?cat=Sociology">Sociology</a>
+    <a href="archive.html" class="active">Archive</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+<main>
+  <div class="section-head">
+    <h1 id="arch-title">Archive</h1>
+    <span class="section-count" id="arch-count"></span>
+  </div>
+  <div id="arch-list"></div>
+</main>
+<footer>
+  <span class="footer-title">Systems &amp; Society</span>
+  <span class="footer-note">Independent &nbsp;·&nbsp; No ads &nbsp;·&nbsp; Rotterdam &nbsp;·&nbsp; Est. 2025</span>
+</footer>
+<script>
+const all=[
+  {title:'The Slow Fracture of <em>Bretton Woods</em>',cat:'Geopolitics',date:'March 2025',href:'articles/bretton-woods.html'},
+  {title:'Negative Liberty and the <em>Illusion of Choice</em>',cat:'Philosophy',date:'March 2025',href:'articles/negative-liberty.html'},
+  {title:'The <em>Invisible</em> Architecture of Class',cat:'Sociology',date:'February 2025',href:'articles/architecture-of-class.html'},
+  {title:'Collective Narcissism and the <em>Wounded Nation</em>',cat:'Psychology',date:'January 2025',href:'articles/collective-narcissism.html'},
+  {title:'Why <em>Degrowth</em> Misunderstands Capitalism',cat:'Economics',date:'December 2024',href:'articles/degrowth.html'},
+  {title:'The <em>Peripheral</em> States and Their Leverage',cat:'Geopolitics',date:'November 2024',href:'articles/peripheral-states.html'},
+  {title:"Hegel's State and the <em>End of History</em> Revisited",cat:'Philosophy',date:'October 2024',href:'articles/hegel-end-of-history.html'},
+];
+const cat=new URLSearchParams(window.location.search).get('cat');
+const list=cat?all.filter(a=>a.cat===cat):all;
+document.getElementById('arch-title').textContent=cat||'Archive';
+document.getElementById('arch-count').textContent=list.length+' essays';
+document.getElementById('arch-list').innerHTML=list.map((a,i)=>`
+  <a class="archive-item" href="${a.href}">
+    <span class="item-num">${String(i+1).padStart(2,'0')}</span>
+    <span class="item-title">${a.title}</span>
+    <span class="item-right">
+      <span class="item-cat">${a.cat}</span>
+      <span class="item-date">${a.date}</span>
+    </span>
+  </a>`).join('');
+</script>
+</body>
+</html>

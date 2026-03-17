@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Systems & Society</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  <style>
+    :root{--ink:#1a1713;--paper:#f4f0e8;--muted:#7a7168;--rule:#c8c0b0;--accent:#2d4a3e;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{font-size:16px;}
+    body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-weight:300;line-height:1.7;min-height:100vh;}
+    body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+    header{border-bottom:1px solid var(--rule);padding:0 2rem;}
+    .masthead-top{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 0 1rem;border-bottom:1px solid var(--rule);gap:1rem;}
+    .issue-tag{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+    .site-title{font-family:'Libre Baskerville',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.02em;line-height:1;text-align:center;flex:1;text-decoration:none;color:var(--ink);}
+    .site-title em{font-style:italic;font-weight:400;}
+    .tagline-right{font-family:'IBM Plex Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;color:var(--muted);text-align:right;}
+    .masthead-nav{display:flex;padding:0.6rem 0;align-items:center;justify-content:center;flex-wrap:wrap;}
+    .masthead-nav a{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);padding:0.3rem 1.2rem;border-right:1px solid var(--rule);transition:color 0.15s;}
+    .masthead-nav a:first-child{border-left:1px solid var(--rule);}
+    .masthead-nav a:hover{color:var(--accent);}
+    .masthead-nav a.active{color:var(--accent);font-weight:500;}
+    main{max-width:680px;margin:0 auto;padding:3rem 2rem 5rem;position:relative;z-index:1;}
+    h1{font-family:'Libre Baskerville',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;letter-spacing:-0.02em;line-height:1.2;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--rule);}
+    p{font-size:1.02rem;line-height:1.85;color:#2a2520;margin-bottom:1.4rem;}
+    p strong{font-family:'Libre Baskerville',serif;color:var(--ink);font-weight:700;}
+    footer{border-top:2px solid var(--ink);padding:1.5rem 2rem;max-width:1160px;margin:0 auto 2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+    .footer-title{font-family:'Libre Baskerville',serif;font-size:0.9rem;font-weight:700;}
+    .footer-note{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.06em;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+    main{animation:fadeUp 0.5s ease both;}
+    @media(max-width:560px){main{padding:2rem 1rem;}header{padding:0 1rem;}.masthead-top{flex-direction:column;text-align:center;}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="masthead-top">
+    <span class="issue-tag">Est. 2025 &nbsp;·&nbsp; Rotterdam</span>
+    <a href="index.html" class="site-title">Systems <em>&</em> Society</a>
+    <span class="tagline-right">On the structures<br>that shape us</span>
+  </div>
+  <nav class="masthead-nav">
+    <a href="index.html">All</a>
+    <a href="archive.html?cat=Economics">Economics</a>
+    <a href="archive.html?cat=Geopolitics">Geopolitics</a>
+    <a href="archive.html?cat=Philosophy">Philosophy</a>
+    <a href="archive.html?cat=Psychology">Psychology</a>
+    <a href="archive.html?cat=Sociology">Sociology</a>
+    <a href="archive.html">Archive</a>
+    <a href="about.html" class="active">About</a>
+  </nav>
+</header>
+<main>
+  <h1>About this archive</h1>
+  <p><strong>Systems &amp; Society</strong> is an independent publication exploring the structures that organise human life. The essays here sit at the intersection of economics, geopolitics, philosophy, psychology, and sociology — not as separate disciplines, but as lenses on the same underlying questions.</p>
+  <p>The project started from a simple frustration: most commentary moves too fast, chases the news cycle, and mistakes familiarity for understanding. This archive moves slower. Essays are published when they're ready, not on a schedule.</p>
+  <p>There are no ads, no sponsors, no algorithm to satisfy. The site is hosted on GitHub Pages and costs about twelve euros a year — the domain name. Nothing else.</p>
+  <p>Based in Rotterdam. Written and published in English.</p>
+</main>
+<footer>
+  <span class="footer-title">Systems &amp; Society</span>
+  <span class="footer-note">Independent &nbsp;·&nbsp; No ads &nbsp;·&nbsp; Rotterdam &nbsp;·&nbsp; Est. 2025</span>
+</footer>
+</body>
+</html>
